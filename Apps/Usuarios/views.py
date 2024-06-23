@@ -3,11 +3,18 @@ from Apps.Juego.views import juego
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
+from .models import Avatar, Naves
 
 # Create your views here.
 
 def registro(req):
     return render(req, "registro.html")
+
+def usuario(req):
+    avatar = Avatar.objects.get(user=req.user.id)
+    naves = Naves.objects.filter(user=req.user.id)
+
+    return render(req, "usuario.html", {"url": avatar.imagen.url, "naves": naves})
 
 def login_view(req):
     if req.method == 'POST':

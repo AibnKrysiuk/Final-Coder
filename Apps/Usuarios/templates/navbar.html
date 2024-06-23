@@ -8,7 +8,17 @@
             <li><a href="{% url 'about' %}">About</a></li>
         </ul>
         {% if user.is_authenticated %}
-            <p>{{user.username}}</p>
+            {% if url %}
+                <div class="usuario">
+                    <div class="avatar">
+                        <img src="{{ url }}" alt="avatar" srcset="">
+                    </div>
+                    <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
+                    {% if puntos %}
+                        <p>Score: {{puntos.puntos}}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
             <a href="{% url 'logout' %}" class="action_btn">Salir</a>
 
         {% else %}

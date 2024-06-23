@@ -13,7 +13,7 @@
                     <div class="avatar">
                         <img src="{{ url }}" alt="avatar" srcset="">
                     </div>
-                    <p>{{user.username}}</p>
+                    <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
                     {% if puntos %}
                         <p>Score: {{puntos.puntos}}</p>
                     {% endif %}

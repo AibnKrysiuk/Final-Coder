@@ -36,6 +36,7 @@ header {
     font-family: "Rubik Doodle Shadow", system-ui;
 }
 
+
 .navbar {
     width: 100%;
     height: 60px;
@@ -67,12 +68,35 @@ header {
     /* background-color: orange; */
     color: black;
     padding: 0.5rem 1rem;
-    border: none;
+    border: 2px solid black;
     outline: none;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
+}
+.usuario {
+    
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+}
+.avatar {
+    /* background-color: orange; */
+    color: black;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid black;
+    overflow: hidden;
+
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .action_btn:hover {
@@ -116,6 +140,60 @@ header {
     display: flex;
     justify-content: center;
 }
+
+/* pagina de usuario */
+.vista {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.panelUsuario {
+    width: 30%;
+    height: 90vh;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel {
+    width: 100%;
+    max-width: 450px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+.username {
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-size: 36px;
+}
+
+.userpoints {
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-size: 24px;
+}
+
+.userimage {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    margin: 20px auto; /* Añade un margen para centrar el círculo */
+}
+
+.userimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Añade borde redondeado a la imagen */
+}
+
 
 /* Formulario de ingreso y registro */
 .container {
@@ -223,6 +301,7 @@ form p a {
     background-color: rgba(240, 240, 220, 1);
     color: #2c2f35;
 }
+
 
 /* Responsive */
 @media (max-width: 992px) {
