@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styleRegistro.css' %}">
+    <script src="https://kit.fontawesome.com/5100bdbfb9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <title>Registro</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="form-content">
+    
+            <h1 id="title">Login</h1>
+            
+            <form action="{% url 'login' %}" method="post">{% csrf_token %}
+    
+                
+                <div class="input-group">
+                    
+                    <div class="input-field" id="nameInput">
+                        <i class="fa-solid fa-user"></i>
+                        {{miFormulario.username}}
+                    </div>
+    
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        {{miFormulario.password}}
+                    </div>
+                    <p>Olvidaste tu contraseña <a href="#">click aqui</a></p>
+                    <p>Crear nuevo usuario <a href="{% url 'register' %}">click aqui</a></p>
+    
+                </div>
+    
+                <div class="btn-field">
+                    <button id="signIn" type="submit">Ingresar</button>
+                </div>
+
+                {% if message %}
+                    <p>{{ message }}</p>
+                {% endif %}
+    
+                {% if miFormulario.errors %}
+                    <ul>
+                        {% for field in miFormulario %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+    
+            </form>
+    
+        </div>
+    </div>
+
+    <script>
+
+        let signUp = document.getElementById("signUp");
+        let signIn = document.getElementById("signIn");
+        let nameInput = document.getElementById("nameInput");
+        let title = document.getElementById("title");
+
+
+        signIn.addEventListener('click', () => {
+            nameInput.style.maxHeight = "0";
+            title.innerHTML = "Login";
+            signUp.classList.add("disable");
+            signIn.classList.remove("disable");
+        })
+
+        signUp.addEventListener('click', () => {
+            nameInput.style.maxHeight = "60px";
+            title.innerHTML = "Registro";
+            signUp.classList.remove("disable");
+            signIn.classList.add("disable");
+        })
+
+    </script>
+</body>
+</html>
+

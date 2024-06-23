@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styleJuego.css' %}">
+    <script src="https://kit.fontawesome.com/5100bdbfb9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <script>
+         var spaceshipImageUrl = "{% static 'img/spaceship.png' %}";
+         var alienImageUrl = "{% static 'img/alien.png' %}";
+    </script>
+    
+    <title>Juego</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% block contenido_cambiante %}
+    <div class="contenedorJuego">
+        <div class="pantalla">
+            <canvas></canvas>
+            <p><span>Score: </span><span id="scoreEl">0</span></p>
+            <button class="btn-more" id="restartButton">Restart</button>
+        </div>
+        <button class="btn-more" id="playButton">Jugar</button>
+    </div>
+    <script src="{% static 'js/index.js' %}"></script>
+    {% endblock contenido_cambiante %}
+</body>
+</html>

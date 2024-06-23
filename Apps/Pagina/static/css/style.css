@@ -1,0 +1,434 @@
+.rubik-doodle-shadow-regular {
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.caveat-brush-regular {
+    font-family: "Caveat Brush", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    height: 100vh;
+    background-color: rgba(240, 240, 220, 1);
+    
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+
+a:hover {
+    color: black;
+}
+
+header {
+    position: relative;
+    padding: 0 2rem;
+    font-family: "Rubik Doodle Shadow", system-ui;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .links {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar .toggle_btn {
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.action_btn {
+    /* background-color: orange; */
+    color: black;
+    padding: 0.5rem 1rem;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.usuario {
+    
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+}
+.avatar {
+    /* background-color: orange; */
+    color: black;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid black;
+    overflow: hidden;
+
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.action_btn:hover {
+    background-color: black;
+    scale: 1.05;
+    color:#fff;
+}
+
+.action_btn:active {
+    scale: 0.95;
+}
+/* Drop MENu */
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+    height: 240px;
+}
+
+.dropdown_menu li {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Pagina Principal */
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2.6rem 0rem;
+    margin: 0 auto;
+    
+
+}
+.header .items {
+    width: 100%;
+    background-color: rgba(150, 150, 100, 1);
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.header .items .item {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header .items .item .item-img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid black;
+    overflow: hidden;
+}
+
+.header .items .item .item-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header .items .item p {
+    font-family: "Caveat Brush", cursive;
+    color: rgba(240, 240, 220, 1);
+}
+
+
+.header .items .item .right {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.header .items .item .right .btn-more{
+    padding: 0.65rem 1.2rem;
+    width: fit-content;
+    background-color: rgba(240, 240, 220, 1);
+    border-radius: 10px;
+    border: 2px solid black;
+    color: black;
+    font-size: 14px;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.header .items .item .right .btn-more:hover{
+    color: rgba(240, 240, 220, 1);
+    background-color: rgba(150, 150, 100, 1);
+}
+.header .items .item .right .btns-nav{
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    gap:3px;
+    background-color: rgba(240, 240, 220, 1);
+    padding: 0.5rem 0.25rem;
+}
+
+.header .items .item .right .btns-nav i{
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.header .items .item .right .btns-nav i:hover{
+    background-color: rgba(150, 150, 100, 1);
+    color: rgba(240, 240, 220, 1);
+    font-size: 16px;
+}
+
+.header .items .item .right .btns-nav span{
+
+    font-size: 14px;
+    color: black;
+}
+
+
+.home {
+    color: black;
+    
+}
+
+.home .items{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minimax(150px,1fr));
+    gap: 2rem;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.home .items .item{
+
+    width: 100%;
+    overflow: hidden;
+    grid-column: span 2;
+}
+
+.home .items .item:nth-child(1){
+    width: 100%;
+    overflow: hidden;
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.home article .tags {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    height: 40px;
+}
+
+.home article .tags .tag{
+    padding: 0.5rem 1rem;
+    background-color: rgba(240, 240, 220, 1);
+    border-radius: 10px;
+    border: 1px solid black;
+    font-family: "Rubik Doodle Shadow", system-ui;
+    color: black;
+    font-size: 14px;
+}
+
+.home article .tags .tag:hover{
+    color: rgba(240, 240, 220, 1);
+    background-color: rgba(150, 150, 100, 1);
+}
+
+.home article .article-title{
+    padding: 0.5rem 0rem;
+    font-family: "Rubik Doodle Shadow", system-ui;
+    color: black;
+    font-size: 36px;
+    height: fit-content;
+}
+
+.home article .article-ditails{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.home article .article-ditails span{
+    display: flex;
+    align-items: center;
+    font-family: "Caveat Brush", cursive;
+    font-size: 14px;
+    gap: 1rem;
+}
+
+.home article .article-ditails .author{
+    font-size: 16px;
+}
+
+.home article .article-ditails .date{
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 0rem 0.2rem;
+}
+
+.home article .article-image{
+    width: 100%;
+    max-height: 350px;
+    overflow: hidden;
+}
+
+.home article .article-image img{
+    width: 25%;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+.home article .article-body{
+    padding: 1rem 0rem;
+}
+
+.home article .article-body p{
+    font-size: 16px;
+    font-family: "Caveat Brush", cursive;
+}
+
+.home article .article-footer{
+    padding: 1rem 0rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home article .article-footer .btn-more{
+    padding: 0.65rem 1.2rem;
+    width: fit-content;
+    background-color: rgba(240, 240, 220, 1);
+    border-radius: 10px;
+    border: 2px solid black;
+    color: black;
+    font-size: 14px;
+    line-height: normal;
+    cursor: pointer;
+    font-family: "Rubik Doodle Shadow", system-ui;
+}
+
+.home article .article-footer .btn-more:hover{
+    color: rgba(240, 240, 220, 1);
+    background-color: rgba(150, 150, 100, 1);
+}
+
+.home article .article-footer .social{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home article .article-footer .social a{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.home article .article-footer .social a:hover{
+    color: rgba(240, 240, 220, 1);
+    background-color: rgba(150, 150, 100, 1);
+}
+
+
+
+
+
+
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .navbar .links,
+    .navbar .action_btn {
+        display: none;
+    }
+
+    .navbar .toggle_btn {
+        display: block;
+    }
+
+    .dropdown_menu {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .dropdown_menu {
+        left: 2rem;
+        width: unset;
+    }
+}
