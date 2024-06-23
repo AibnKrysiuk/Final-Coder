@@ -9,15 +9,19 @@
         </ul>
         {% if user.is_authenticated %}
             <div class="usuario">
-                {% if url %}
-                    <div class="avatar">
+                <div class="avatar">
+                    {% if url %}
                         <img src="{{ url }}" alt="avatar" srcset="">
-                    </div>
-                {% endif %}
-                {% if puntos %}
-                    <p>Score: {{puntos.puntos}}</p>
-                {% endif %}
-                <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
+                    {% endif %}
+                </div>
+                <div class="score">
+                    {% if user.profile %}
+                        <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
+                        <a href="{% url 'market' %}"><p>Score: {{user.profile.puntos}}</p></a>                          
+                    {% else %}
+                        <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
+                    {% endif %}
+                </div>
             </div>
                 <a href="{% url 'logout' %}" class="action_btn">Salir</a>
 

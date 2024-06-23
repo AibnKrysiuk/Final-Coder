@@ -60,8 +60,9 @@ def register(req):
 
         if miFormulario.is_valid():
             miFormulario.save()
-            usuario = miFormulario.cleaned_data.get('username')
-            return render(req, "juego.html" , {"message": f'Usuario:  {usuario} creado con éxito'})
+
+            miFormulario2 = CustomAuthenticationForm(req, data=req.POST)
+            return render(req, "login.html", {"miFormulario": miFormulario2})
         else:
             return render(req, "registro.html", {"miFormulario": miFormulario, "message": 'Datos incorrectos'})
         

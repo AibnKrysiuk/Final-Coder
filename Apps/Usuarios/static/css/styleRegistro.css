@@ -194,6 +194,20 @@ header {
     border-radius: 50%; /* Añade borde redondeado a la imagen */
 }
 
+.user_ships {
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+.user_ships img{
+    border: 2px solid black;
+    width: 25%;
+    height: 25%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 
 /* Formulario de ingreso y registro */
 .container {

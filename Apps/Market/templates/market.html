@@ -14,9 +14,11 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    <div class="btn-field">
-        <button id="signIn"><a href="{% url 'ship_formulario' %}">Agregar Nave</a></button>
-    </div>
+    {% if user.is_authenticated and user.is_superuser %}
+        <div class="btn-field">
+            <button id="signIn"><a href="{% url 'ship_formulario' %}">Agregar Nave</a></button>
+        </div>
+    {% endif %}
     <div class="container">
         {% for ship in market %}
 
@@ -32,9 +34,9 @@
                     <h3>{{ ship.nombre }}</h3>
                     <p>{{ ship.descripcion }}</p>
                     <p>{{ ship.price }}</p>
-                    <form action="" method="post">
+                    <form action="{% url 'comprar_nave' ship.id %}" method="post">
                         {% csrf_token %}
-                        <input type="hidden" name="nave_id" value="{{ ship.id }}"> <!-- Pasar el ID de la nave -->
+                        <input type="hidden" name="nave_id" value="{{ ship.id }}">
                         <button type="submit">Comprar</button>
                     </form>
                 </div>

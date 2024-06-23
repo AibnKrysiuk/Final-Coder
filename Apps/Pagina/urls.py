@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path
-from .views import index, rank, about
-from Apps.Usuarios.views import registro,login_view, usuario
+from .views import index, rank, about, post_formulario
+
 # from Apps.Market.views import market
 # from Apps.Juego.views import juego
 
@@ -11,6 +11,7 @@ urlpatterns = [
     # path('juego', juego, name='juego'),
     path('rank', rank, name='rank'),
     path('about', about, name='about'),
+    path('post_formulario', post_formulario, name='post_formulario'),
     # path('registro', registro, name='registro'),
     # path('login', login_view, name='login'),
     # path('usuario', usuario, name='usuario'),

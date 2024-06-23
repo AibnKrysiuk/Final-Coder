@@ -10,3 +10,4 @@ class Ship(models.Model):
 
     def __str__(self):
         return f'{self.nombre} - {self.descripcion} - {self.price}'
+    

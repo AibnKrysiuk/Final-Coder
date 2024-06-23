@@ -1,5 +1,10 @@
 {% extends 'plantilla.html' %}
 
 {% block contenido_cambiante %}
-    <h1>Rank</h1>
+    <h1>Usuarios y sus puntos</h1>
+    <ul>
+        {% for usuario in usuarios_con_puntos %}
+            <li>Posición {{ usuario.posicion }} : {{ usuario.username }} - Puntos: {{ usuario.puntos }}</li>
+        {% endfor %}
+    </ul>
 {% endblock contenido_cambiante %}

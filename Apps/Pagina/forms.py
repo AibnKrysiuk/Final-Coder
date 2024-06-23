@@ -5,4 +5,7 @@ class PostFormulario(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ('__all__')
+        fields = ['titulo', 'autor', 'fecha', 'meGusta','imagen', 'texto']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+        }

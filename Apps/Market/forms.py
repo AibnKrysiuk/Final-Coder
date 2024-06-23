@@ -5,4 +5,4 @@ class ShipFormulario(forms.ModelForm):
     
     class Meta:
         model = Ship
-        fields = ('__all__')
+        fields = ['nombre', 'descripcion', 'price', 'imagen']

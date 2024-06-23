@@ -1,7 +1,7 @@
 {% extends 'plantilla.html' %}
 
 {% block contenido_cambiante %}
-<form action="{% url 'ship_formulario' %}" method="post">{% csrf_token %}
+<form action="{% url 'ship_formulario' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{miFormulario.as_p}}
 
     <div class="btn-field">

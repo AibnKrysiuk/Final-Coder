@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/styleRegistro.css' %}">
     <script src="https://kit.fontawesome.com/5100bdbfb9.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
     <title>Page</title>
 </head>
+
 <body>
     {% include 'navbar.html' %}
     <div class="vista">
@@ -19,39 +22,41 @@
             <div class="panel">
                 {% if user.is_authenticated %}
                 <p class="username">{{user.username}}</p>
-                <p class="userpoints">{{user.puntos.puntos}}</p>
-                    {% if url %}
-                        <div class="userimage">
-                            <img src="{{ url }}" alt="Imagen no encontrada" srcset="">
-                        </div>
-                    {% else %}
-                        <div class="userimage" style="background-color: black;">
-                            <img src="" alt="Imagen no encontrada" srcset="">
-                        </div>
-                        <a href="{% url 'crear_avatar' %}" class="action_btn">Añadir Avatar</a>
-                    {% endif %}
-                    <p>Amigos: 0</p>                    
-                </div>
+                {% if user.profile %}
+                <p class="userpoints">Score: {{user.profile.puntos}}</p>
                 {% endif %}
-            </div>
-            <div class="panelUsuario">
-                <div class="panel">
-                    <p class="username">Naves</p>
-                    <p class="userpoints"></p>
-                    {% if naves %}
-                        {% for nave in naves %}
-                            <div class="userimage">
-                                <img src="{{ nave.imagen.url }}" alt="Imagen no encontrada">
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>El usuario no tiene ninguna nave.</p>
-                    {% endif %}
-                    <a href="{% url 'market' %}" class="action_btn">comprar</a>
+                {% if url %}
+                <div class="userimage">
+                    <img src="{{ url }}" alt="Imagen no encontrada" srcset="">
                 </div>
+                {% else %}
+                <div class="userimage" style="background-color: black;">
+                    <img src="" alt="Imagen no encontrada" srcset="">
+                </div>
+                <a href="{% url 'crear_avatar' %}" class="action_btn">Añadir Avatar</a>
+                {% endif %}
+                <p>Amigos: 0</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="panelUsuario">
+            <div class="panel">
+                <p class="username">Naves</p>
+                {% if user.profile.naves.all %}
+                {% for nave in user.profile.naves.all %}
+                <div class="user_ships">
+                    <img src="{{ nave.imagen.url }}" alt="Imagen de la nave">
+                </div>
+                <p>{{ nave.nombre }}</p>
+                {% endfor %}
+                {% else %}
+                <p>El usuario no tiene ninguna nave.</p>
+                {% endif %}
+                <a href="{% url 'market' %}" class="action_btn">Comprar</a>
             </div>
         </div>
     </div>
+    </div>
 </body>
-</html>
 
+</html>
