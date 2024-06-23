@@ -1,20 +1,34 @@
 from django.shortcuts import render
 from Apps.Juego.views import juego
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
-from .models import Avatar, Naves
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Avatar
+from .forms import AvatarForm
 
 # Create your views here.
 
 def registro(req):
     return render(req, "registro.html")
 
-def usuario(req):
-    avatar = Avatar.objects.get(user=req.user.id)
-    naves = Naves.objects.filter(user=req.user.id)
 
-    return render(req, "usuario.html", {"url": avatar.imagen.url, "naves": naves})
+@login_required
+def usuario(req):
+    try:
+        avatar = Avatar.objects.get(user=req.user)
+        url_avatar = avatar.imagen.url
+    except ObjectDoesNotExist:
+        url_avatar = None
+
+    return render(req, "usuario.html", {"url": url_avatar})
+
+# def usuario(req):
+#     usuario = req.user
+#     avatar = usuario.avatar
+#     naves = usuario.naves.all()
+
+#     return render(req, "usuario.html", {"url": avatar.imagen.url, "naves": naves})
 
 def login_view(req):
     if req.method == 'POST':
@@ -54,3 +68,24 @@ def register(req):
     else: 
         miFormulario = CustomUserCreationForm()
         return render(req, "registro.html", {"miFormulario": miFormulario})
+    
+@login_required
+def crear_avatar(req):
+    if req.method == 'POST':
+        form = AvatarForm(req.POST, req.FILES)
+        if form.is_valid():
+            avatar = form.save(commit=False)
+            avatar.user = req.user
+            avatar.save()
+
+            try:
+                avatar = Avatar.objects.get(user=req.user)
+                url_avatar = avatar.imagen.url
+            except ObjectDoesNotExist:
+                url_avatar = None
+
+            return render(req, "usuario.html", {"url": url_avatar})
+            # return render(req, "usuario.html")  # Redirigir a la vista de usuario
+    else:
+        form = AvatarForm()
+    return render(req, 'crear_avatar.html', {'form': form})

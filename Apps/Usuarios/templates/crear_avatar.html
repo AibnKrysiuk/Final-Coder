@@ -1,0 +1,9 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido_cambiante %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Avatar</button>
+</form>
+{% endblock contenido_cambiante %}

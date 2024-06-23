@@ -21,9 +21,14 @@
                 <p class="username">{{user.username}}</p>
                 <p class="userpoints">{{user.puntos.puntos}}</p>
                     {% if url %}
-                    <div class="userimage">
-                        <img src="{{ url }}" alt="Imagen no encontrada" srcset="">
-                    </div>
+                        <div class="userimage">
+                            <img src="{{ url }}" alt="Imagen no encontrada" srcset="">
+                        </div>
+                    {% else %}
+                        <div class="userimage" style="background-color: black;">
+                            <img src="" alt="Imagen no encontrada" srcset="">
+                        </div>
+                        <a href="{% url 'crear_avatar' %}" class="action_btn">Añadir Avatar</a>
                     {% endif %}
                     <p>Amigos: 0</p>                    
                 </div>
@@ -36,14 +41,14 @@
                     {% if naves %}
                         {% for nave in naves %}
                             <div class="userimage">
-                                <img src="{{ nave.imagen.url }}" alt="Imagen no encontrada" srcset="">
+                                <img src="{{ nave.imagen.url }}" alt="Imagen no encontrada">
                             </div>
                         {% endfor %}
                     {% else %}
                         <p>El usuario no tiene ninguna nave.</p>
                     {% endif %}
                     <a href="{% url 'market' %}" class="action_btn">comprar</a>
-                    
+                </div>
             </div>
         </div>
     </div>

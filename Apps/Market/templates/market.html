@@ -32,7 +32,11 @@
                     <h3>{{ ship.nombre }}</h3>
                     <p>{{ ship.descripcion }}</p>
                     <p>{{ ship.price }}</p>
-                    <a href="{% url 'comprar_nave' %}">Comprar</a>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="nave_id" value="{{ ship.id }}"> <!-- Pasar el ID de la nave -->
+                        <button type="submit">Comprar</button>
+                    </form>
                 </div>
             </div>
 

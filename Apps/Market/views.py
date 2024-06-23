@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from .forms import ShipFormulario
 from .models import Ship
-from Apps.Usuarios.models import Puntos
+from Apps.Usuarios.views import usuario
+
 
 # Create your views here.
 
@@ -34,29 +35,30 @@ def ship_formulario(req):
         miFormulario = ShipFormulario()
         return render(req, "ship_formulario.html", {"miFormulario": miFormulario})
     
-def comprar_nave(req):
-    if req.method == 'POST':
-        nave_id = req.POST.get('nave_id')
-        nave = Ship.objects.get(pk=nave_id)
-        puntos = Puntos.objects.get(user=req.user)
+# def comprar_nave(req):
+#     if req.method == 'POST':
+#         nave_id = req.POST.get('nave_id')
+#         nave = Ship.objects.get(pk=nave_id)
+#         usuario = req.user
         
-        if puntos.puntos >= nave.precio:
-            # Restar los puntos necesarios para comprar la nave
-            puntos.puntos -= nave.precio
-            puntos.save()
+#         if usuario.puntos >= nave.price:
+#             # Restar los puntos necesarios para comprar la nave
+#             usuario.puntos -= nave.price
+#             usuario.save()
             
-            # Agregar la nave al usuario (aquí asumimos que tienes un modelo de Usuario)
-            usuario = req.user
-            usuario.nave = nave
-            usuario.save()
+#             # Agregar la nave al usuario
+#             usuario.nave = nave
+#             usuario.save()
             
-            return redirect('usuario.html')  # Redirigir a la página principal después de comprar la nave
-        else:
-            return render(req, 'market.html')  # Mostrar un mensaje de que no tienes suficientes puntos
-    else:
-        # Lógica para mostrar las naves disponibles para comprar en un formulario
-        nave = Ship.objects.all()
-        return render(req, 'market.html', {'naves': nave})
+#             lista = Ship.objects.all()
+#             return render(req, 'market.html', {"market": lista})  # Redirigir a la página principal después de comprar la nave
+#         else:
+#             lista = Ship.objects.all()
+#             return render(req, 'market.html', {"market": lista, "message": "No tienes suficientes puntos"})  # Mostrar un mensaje de que no tienes suficientes puntos
+#     else:
+#         # Lógica para mostrar las naves disponibles para comprar en un formulario
+#         lista = Ship.objects.all()
+#         return render(req, 'market.html', {"market": lista})
 
 # def ship_formulario(req):
 
