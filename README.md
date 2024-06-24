@@ -10,3 +10,4 @@ Ademas se puede ver en el incio un Blog donde se van a subir novedades del juego
 Juego:
 Con respecto al juego fue sacado de un video de youtube.
 Es un proyecto personal y pense que seria divertido incrustarlo en la pagina
+Controles: A,D,BarraEspaciadora
