@@ -5,6 +5,7 @@ from Apps.Usuarios.models import Profile
 from django.contrib.auth.models import User
 from Apps.Usuarios.models import Avatar
 import datetime
+import os
 
 # Create your views here.
 
@@ -20,8 +21,6 @@ def index(req):
     lista = Post.objects.all().order_by('-id')
     return render(req, "index.html", {"url": avatar_url, "lista_post": lista})
 
-# def rank(req):
-#     return render(req, "rank.html")
 
 def about(req):
     return render(req, "about.html")
@@ -50,6 +49,36 @@ def post_formulario(req):
         miFormulario = PostFormulario()
         return render(req, "post_formulario.html", {"miFormulario": miFormulario})
     
+def borrar_post(req, post_id):
+    post_por_borrar = Post.objects.get(id=post_id)
+    post_por_borrar.delete()
+
+    lista = Post.objects.all().order_by('-id')
+    return render(req, "index.html", {"lista_post": lista})
+
+def actualizar_post(req, post_id):
+    post_a_actualizar = Post.objects.get(id=post_id)
+
+    if req.method == 'POST':
+
+        imagen_anterior = post_a_actualizar.imagen.path if post_a_actualizar.imagen else None
+
+        mi_formulario = PostFormulario(req.POST, req.FILES, instance=post_a_actualizar)
+
+        if mi_formulario.is_valid():
+            if 'imagen' in req.FILES and imagen_anterior:
+                if os.path.isfile(imagen_anterior):
+                    os.remove(imagen_anterior)
+
+            mi_formulario.save()
+            lista = Post.objects.all().order_by('-id')
+            return render(req, "index.html", {"lista_post": lista})
+    else:
+        mi_formulario = PostFormulario(instance=post_a_actualizar)
+    
+    return render(req, "actualizar_post.html", {"miFormulario": mi_formulario, 'post': post_a_actualizar})
+
+
 def rank(req):
     perfiles = Profile.objects.order_by('-puntos')[:10] 
     usuarios_con_puntos = [{'username': perfil.user.username, 'puntos': perfil.puntos} for perfil in perfiles]

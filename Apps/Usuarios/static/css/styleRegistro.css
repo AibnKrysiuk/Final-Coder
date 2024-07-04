@@ -45,6 +45,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* border: 2px solid black; */
 }
 
 .navbar .logo a {
@@ -141,12 +142,87 @@ header {
     justify-content: center;
 }
 
-/* pagina de usuario */
+
+/*Pagina */
 .vista {
+    margin-top: 2%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* border: 2px solid black;
+    border-radius: 10px; */
 }
+
+/*Aministrador */
+.panel_administrador {
+    width: 100%;
+    max-width: 1200px;
+    height: 40vh;
+    /* border: 2px solid black;
+    border-radius: 10px; */
+    padding: 1%;
+    text-align: center;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_administrar {
+    width: 250px;
+    height: 75px;
+    display: grid;
+    
+}
+
+.btn_administrar a {
+    font-family: "Rubik Doodle Shadow", system-ui;
+    flex-basis: 48%;
+    font-size: 16px;
+    color: black;
+    height: 100%;
+
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.vista_listas {
+    width: 75%;
+    height: 100%;
+    /* border-radius: 10px;
+    border: 2px solid black; */
+    overflow-y: auto;
+
+}
+
+.vista_listas ul {
+    width: 100%;
+    display: grid;
+
+    justify-items:flex-start;
+
+
+}
+
+.vista_listas ul li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post_listados {
+    width: 75%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+
+/* pagina de usuario */
+
 .panelUsuario {
     width: 30%;
     height: 90vh;
@@ -315,6 +391,7 @@ form p a {
     background-color: rgba(240, 240, 220, 1);
     color: #2c2f35;
 }
+
 
 
 /* Responsive */

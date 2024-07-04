@@ -3,6 +3,7 @@ from .forms import ShipFormulario
 from .models import Ship
 from Apps.Usuarios.views import usuario
 from django.contrib.auth.decorators import user_passes_test, login_required
+import os
 
 
 
@@ -45,10 +46,10 @@ def ship_formulario(req):
     
 @login_required(login_url='login')
 def comprar_nave(req, ship_id):
-    # Obtener la nave seleccionada
+
     ship = Ship.objects.get(id=ship_id)
     
-    # Obtener el perfil del usuario logueado
+
     profile = req.user.profile
     
     # Verificar si el usuario tiene suficientes puntos
@@ -68,49 +69,28 @@ def comprar_nave(req, ship_id):
         lista = Ship.objects.all()
         return render(req, "market.html", {"market": lista})
     
-# def comprar_nave(req):
-#     if req.method == 'POST':
-#         nave_id = req.POST.get('nave_id')
-#         nave = Ship.objects.get(pk=nave_id)
-#         usuario = req.user
-        
-#         if usuario.puntos >= nave.price:
-#             # Restar los puntos necesarios para comprar la nave
-#             usuario.puntos -= nave.price
-#             usuario.save()
-            
-#             # Agregar la nave al usuario
-#             usuario.nave = nave
-#             usuario.save()
-            
-#             lista = Ship.objects.all()
-#             return render(req, 'market.html', {"market": lista})  # Redirigir a la página principal después de comprar la nave
-#         else:
-#             lista = Ship.objects.all()
-#             return render(req, 'market.html', {"market": lista, "message": "No tienes suficientes puntos"})  # Mostrar un mensaje de que no tienes suficientes puntos
-#     else:
-#         # Lógica para mostrar las naves disponibles para comprar en un formulario
-#         lista = Ship.objects.all()
-#         return render(req, 'market.html', {"market": lista})
+def borrar_nave(req, ship_id):
+    nave_a_borrar = Ship.objects.get(id=ship_id)
+    nave_a_borrar.delete()
 
-# def ship_formulario(req):
+    naves = Ship.objects.all().order_by('-id')
+    return render(req, "market.html", {"market": naves})
 
-#     if req.method == 'POST':
-#         miFormulario = ShipFormulario(req.POST, req.FILES)
+def actualizar_nave(req, ship_id):
+    nave_a_actualizar = Ship.objects.get(id=ship_id)
 
-#         if miFormulario.is_valid():
+    if req.method == 'POST':
+        imagen_anterior = nave_a_actualizar.imagen.path if nave_a_actualizar.imagen else None
+        mi_formulario = ShipFormulario(req.POST, req.FILES, instance=nave_a_actualizar)
 
-#             data = miFormulario.cleaned_data
+        if mi_formulario.is_valid():
+            if 'imagen' in req.FILES and imagen_anterior:
+                if os.path.isfile(imagen_anterior):
+                    os.remove(imagen_anterior)
 
-#             nuevo_ship = Ship(nombre=data['nombre'], price=data['price'], descripcion=['descripcion'], imagen=['imagen'])
-#             nuevo_ship.save()
-
-#             lista = Ship.objects.all()
-
-#             return render(req, "market.html", {"market": lista})
-#         else:
-#             return render(req, "ship_formulario.html", {"message": "datos incorrectos"})
-        
-#     else:
-#         miFormulario = ShipFormulario()
-#         return render(req, "ship_formulario.html", {"miFormulario": miFormulario})
+            mi_formulario.save()
+            naves = Ship.objects.all().order_by('-id')
+            return render(req, "market.html", {"market": naves})
+    else:
+        mi_formulario = ShipFormulario(instance=nave_a_actualizar)
+    return render(req, "actualizar_nave.html", {"miFormulario": mi_formulario, 'ship': nave_a_actualizar})

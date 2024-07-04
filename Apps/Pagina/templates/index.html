@@ -39,11 +39,6 @@
             </div>
         </div>
     </header>
-    {% if user.is_authenticated and user.is_superuser %}
-        <div class="btn-field">
-            <button id="signIn"><a href="{% url 'post_formulario' %}">Agregar Post</a></button>
-        </div>
-    {% endif %}
 
     <section class="home" id="home">
         <div class="container">

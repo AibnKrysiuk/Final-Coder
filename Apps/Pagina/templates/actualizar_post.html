@@ -1,7 +1,7 @@
 {% extends 'plantilla.html' %}
 
 {% block contenido_cambiante %}
-<form action="{% url 'post_formulario' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+<form action="{% url 'actualizar_post' post.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{miFormulario.as_p}}
 
     {% if post.imagen %}
@@ -15,7 +15,7 @@
     {% endif %}
     
     <div class="btn-field">
-        <button id="signIn" type="submit">Agregar Post</button>
+        <button id="signIn" type="submit">Actualizar Post</button>
     </div>
 </form>
 {% endblock contenido_cambiante %}

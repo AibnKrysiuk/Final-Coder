@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path
-from .views import index, rank, about, post_formulario
+from .views import index, rank, about, post_formulario, actualizar_post
 
 # from Apps.Market.views import market
 # from Apps.Juego.views import juego

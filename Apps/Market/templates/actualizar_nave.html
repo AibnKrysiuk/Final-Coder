@@ -1,0 +1,11 @@
+{% extends 'plantilla.html' %}
+
+{% block contenido_cambiante %}
+<form action="{% url 'actualizar_nave' ship.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{miFormulario.as_p}}
+
+    <div class="btn-field">
+        <button id="signIn" type="submit">Agregar Nave</button>
+    </div>
+</form>
+{% endblock contenido_cambiante %}

@@ -6,7 +6,8 @@ from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Avatar
 from .forms import AvatarForm
-
+from Apps.Pagina.models import Post
+from Apps.Market.models import Ship
 # Create your views here.
 
 def registro(req):
@@ -23,12 +24,14 @@ def usuario(req):
 
     return render(req, "usuario.html", {"url": url_avatar})
 
-# def usuario(req):
-#     usuario = req.user
-#     avatar = usuario.avatar
-#     naves = usuario.naves.all()
+def administrar_post(req):
+    lista = Post.objects.all().order_by('-id')
+    return render(req, "usuario.html", {"lista_post": lista, 'mostrar_posts': True})
 
-#     return render(req, "usuario.html", {"url": avatar.imagen.url, "naves": naves})
+def listar_naves(req):
+    naves = Ship.objects.all().order_by('-id')
+    return render(req, "usuario.html", {"lista_naves": naves, 'mostrar_naves':True})
+
 
 def login_view(req):
     if req.method == 'POST':

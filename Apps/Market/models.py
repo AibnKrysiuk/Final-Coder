@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 
@@ -11,3 +12,7 @@ class Ship(models.Model):
     def __str__(self):
         return f'{self.nombre} - {self.descripcion} - {self.price}'
     
+    def delete(self, *args, **kwargs):
+        if self.imagen and os.path.isfile(self.imagen.path):
+            os.remove(self.imagen.path)
+        super().delete(*args, **kwargs)

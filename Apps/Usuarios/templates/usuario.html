@@ -18,6 +18,45 @@
 <body>
     {% include 'navbar.html' %}
     <div class="vista">
+        {% if user.is_authenticated and user.is_superuser %}
+        <div class="panel_administrador">
+            <div class="btn_administrar">
+                <a href="{% url 'administrar_post' %}" class="listaPost">Ver Post Listados</a>
+                <a href="{% url 'post_formulario' %}">Agregar Post</a>
+                <a href="{% url 'listar_naves' %}" class="listaNaves">Ver Naves Listadas</a>
+                <a href="{% url 'ship_formulario' %}">Agregar Nave</a>
+            </div>
+            <div class="vista_listas" >
+                <ul id="vistaPost">
+                    {% if mostrar_posts %}
+                        {% for post in lista_post %}
+                        <li>
+                            <div class="post_listados">
+                                <p>"Titulo": {{ post.titulo }}, "Autor": {{ post.autor }}, "Fecha": {{ post.fecha }}</p>
+                            </div>
+                            <div class="post_botones">
+                                <a href="{% url 'actualizar_post' post.id %}" class="action_btn">Actualizar</a>
+                                <a href="{% url 'borrar_post' post.id %}" class="action_btn">Borrar</a>
+                            </div>                       
+                        </li>
+                        {% endfor %}
+                    {% elif mostrar_naves %}
+                        {% for nave in lista_naves %}
+                        <li>
+                            <div class="post_listados">
+                                <p>Nombre: {{ nave.nombre }}, Costo: {{ nave.price }}</p>
+                            </div>
+                            <div class="post_botones">
+                                <a href="{% url 'actualizar_nave' nave.id %}" class="action_btn">Actualizar</a>
+                                <a href="{% url 'borrar_nave' nave.id %}"  class="action_btn">Borrar</a>
+                            </div>                       
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
         <div class="panelUsuario">
             <div class="panel">
                 {% if user.is_authenticated %}
@@ -57,6 +96,7 @@
         </div>
     </div>
     </div>
+
 </body>
 
 </html>
