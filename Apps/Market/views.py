@@ -3,6 +3,8 @@ from .forms import ShipFormulario
 from .models import Ship
 from Apps.Usuarios.views import usuario
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.core.exceptions import ObjectDoesNotExist
+from Apps.Usuarios.models import Avatar
 import os
 
 
@@ -13,8 +15,14 @@ import os
 #     return render(req, "market.html")
 
 def market(req):
+    try:
+        avatar = Avatar.objects.get(user=req.user)
+        url_avatar = avatar.imagen.url
+    except ObjectDoesNotExist:
+        url_avatar = None
+
     lista = Ship.objects.all()
-    return render(req, 'market.html', {"market": lista})
+    return render(req, 'market.html', {"market": lista, "url": url_avatar})
 
 def superuser_required(user):
     return user.is_superuser

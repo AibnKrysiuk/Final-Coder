@@ -3,14 +3,16 @@ const scoreEl = document.querySelector('#scoreEl');
 const canvasContainer = document.querySelector('#canvasContainer');
 const playButton = document.querySelector('#playButton');
 const restartButton = document.querySelector('#restartButton');
+const pantalla = document.querySelector('.pantalla');
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
 const nave = spaceshipImageUrl;
 const alien = alienImageUrl;
 
-canvas.width = 1280;
-canvas.height = 800;
+canvas.width = pantalla.offsetWidth;
+canvas.height = pantalla.offsetHeight;
+
 
 class Player {
     constructor() {
@@ -23,8 +25,8 @@ class Player {
 
         image.onload = () => {
             this.image = image;
-            this.width = image.width * 0.15;
-            this.height = image.height * 0.15;
+            this.width = image.width * 0.09;
+            this.height = image.height * 0.09;
             this.position = {
                 x: canvas.width / 2 - this.width / 2,
                 y: canvas.height - this.height - 20
@@ -127,7 +129,7 @@ class Invader {
         const image = new Image();
         image.src = alienImageUrl;
         image.onload = () => {
-            const scale = 0.08;
+            const scale = 0.03;
             this.image = image;
             this.width = image.width * scale;
             this.height = image.height * scale;
@@ -161,14 +163,14 @@ class Invader {
 class Grid {
     constructor() {
         this.position = { x: 0, y: 0 };
-        this.velocity = { x: 5, y: 0 };
+        this.velocity = { x: 3, y: 0 };
         this.invaders = [];
-        const columns = Math.floor(Math.random() * 10 + 5);
-        const rows = Math.floor(Math.random() * 5 + 2);
+        const columns = Math.floor(Math.random() * 10 + 3);
+        const rows = Math.floor(Math.random() * 3 + 1);
         this.width = columns * 65;
         for (let x = 0; x < columns; x++) {
             for (let y = 0; y < rows; y++) {
-                this.invaders.push(new Invader({ position: { x: x * 65, y: y * 45 } }));
+                this.invaders.push(new Invader({ position: { x: x * 45, y: y * 25 } }));
             }
         }
     }

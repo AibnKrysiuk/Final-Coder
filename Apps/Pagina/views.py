@@ -4,6 +4,7 @@ from .forms import PostFormulario
 from Apps.Usuarios.models import Profile
 from django.contrib.auth.models import User
 from Apps.Usuarios.models import Avatar
+from django.core.exceptions import ObjectDoesNotExist
 import datetime
 import os
 
@@ -23,7 +24,14 @@ def index(req):
 
 
 def about(req):
-    return render(req, "about.html")
+    try:
+        avatar = Avatar.objects.get(user=req.user)
+        url_avatar = avatar.imagen.url
+    except ObjectDoesNotExist:
+        url_avatar = None
+
+    return render(req, "about.html", {"url": url_avatar})
+
 
 
 def post_formulario(req):
@@ -80,6 +88,12 @@ def actualizar_post(req, post_id):
 
 
 def rank(req):
+    try:
+        avatar = Avatar.objects.get(user=req.user)
+        url_avatar = avatar.imagen.url
+    except ObjectDoesNotExist:
+        url_avatar = None
+
     perfiles = Profile.objects.order_by('-puntos')[:10] 
     usuarios_con_puntos = [{'username': perfil.user.username, 'puntos': perfil.puntos} for perfil in perfiles]
     
@@ -91,4 +105,4 @@ def rank(req):
     for idx, usuario in enumerate(usuarios_con_puntos):
         usuario['posicion'] = idx + 1
     
-    return render(req, 'rank.html', {'usuarios_con_puntos': usuarios_con_puntos})
+    return render(req, 'rank.html', {'usuarios_con_puntos': usuarios_con_puntos, "url": url_avatar})

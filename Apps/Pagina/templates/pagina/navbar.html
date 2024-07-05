@@ -1,25 +1,31 @@
 <header>
     <div class="navbar">
         <div class="logo"><a href="{% url 'index' %}">Logo De Juego</a></div>
-        <ul class="links">
-            <li><a href="{% url 'juego' %}">Jugar</a></li>
-            <li><a href="{% url 'market' %}">Market</a></li>
-            <li><a href="{% url 'rank' %}">Rankin</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
+        <div class="menu_links">
+            <ul class="links">
+                <li><a href="{% url 'juego' %}">Jugar</a></li>
+                <li><a href="{% url 'market' %}">Market</a></li>
+                <li><a href="{% url 'rank' %}">Rankin</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </div>
         {% if user.is_authenticated %}
-            {% if url %}
-                <div class="usuario">
-                    <div class="avatar">
+            <div class="usuario">
+                <div class="avatar">
+                    {% if url %}
                         <img src="{{ url }}" alt="avatar" srcset="">
-                    </div>
-                    <a href="{% url 'usuario' %}"><p>{{user.username}}</p></a>
-                    {% if puntos %}
-                        <p>Score: {{puntos.puntos}}</p>
                     {% endif %}
                 </div>
-            {% endif %}
-            <a href="{% url 'logout' %}" class="action_btn">Salir</a>
+                <div class="score">
+                    {% if user.profile %}
+                        <a href="{% url 'usuario' %}">{{user.username}}</a>
+                        <a href="{% url 'market' %}">Pts: {{user.profile.puntos}}</a>                          
+                    {% else %}
+                        <a href="{% url 'usuario' %}">{{user.username}}</a>
+                    {% endif %}
+                </div>
+            </div>
+                <a href="{% url 'logout' %}" class="action_btn">Salir</a>
 
         {% else %}
             <a href="{% url 'login' %}" class="action_btn">Ingresar</a> 
